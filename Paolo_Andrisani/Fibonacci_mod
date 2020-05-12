@@ -1,0 +1,76 @@
+import math
+
+## INPUT:
+n = 50
+p = 7
+
+## Calcola la successione fino a n
+def fibonacci(n):
+    a = []
+    a.append(0)
+    a.append(1)
+    for i in range(2,n):
+        a.append(a[i-1] + a[i-2])
+    return a
+        
+## Calcola la successione modulo p 
+def mod(a,p):
+    a_mod = [x%p for x in a]
+    return a_mod
+
+## Controlla se l'intervallo [0,i] si ripete periodicamente
+def controllo(a,i):
+    n = len(a)
+    j = 0
+    while(j+i <= n-1):
+        if a[j] != a[j+i]:
+            return False
+        j += 1
+    return True
+
+## Ritorna il periodo. Bisogna dare a[] in input per migliorare
+## l'efficienza. Togliere il commento e l'input per renderla  
+## molto più versatile
+def periodoFibonacci (a,n,p):
+#   a = fibonacci(n)
+    a_mod = mod(a,p)
+    for i in range(1,n):
+        if a_mod[i] == 0 and controllo(a_mod,i) == True:
+            return i
+    print("Errore: Non trovo un ciclo, n piccolo")
+        
+## Genera i primi fino a
+def primesUntil(n):
+    quest = 0
+    primi=[2,3]
+    for i in range(4,n+1):
+        for j in primi:
+            if j > int(math.sqrt(i)):
+                quest = 1
+                break
+            if i%j==0:
+                quest=0
+                break
+            quest = 1
+        if quest == 1:
+            primi.append(i)
+            i += 1
+    return primi
+
+##########################################################
+
+## Stampa i periodi di fibonacci al variare di p = primo
+def stampaPeriodiPrimi(n):
+    primi = primesUntil(n)
+    a = fibonacci(n) #commentare la riga se si è cambiata periodoFibonacci 
+    for x in primi:
+        print("p = ", x, "T = ",periodoFibonacci(a,n,x))
+            
+## stampa i periodi di fibonacci al variare di d = non primo
+def stampaPeriodi(n):
+    primi = primesUntil(n)
+    a = fibonacci(n) #commentare la riga se si è cambiata periodoFibonacci 
+    for x in range(2,n):
+        print("d = ", x, "T = ",periodoFibonacci(a,n,x))
+            
+        
