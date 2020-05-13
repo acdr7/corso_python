@@ -1,4 +1,11 @@
 
+#devo mettere un contatore per determinare il periodo
+#posso contare dopo quanto compare 0 1 1
+
+#poi devo fare una funzione periodo - modulo
+#la plotto per vedere cosa esce
+
+#per i primi il periodo divide sempre n^2-1 , da rivedere
 
 #--------------------------------------------
 #Se voglio scegliere in input l'n faccio questo
